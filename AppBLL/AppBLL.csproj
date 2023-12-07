@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Implements\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AppDAL\AppDAL.csproj" />
     <ProjectReference Include="..\AppEntity\AppEntity.csproj" />
   </ItemGroup>
