@@ -14,7 +14,22 @@ namespace AppDAL
         {
         }
 
+        public void CreateSchema(ModelBuilder builder)
+        {
+            OnModelCreating(builder);
+        }
+
         public DbSet<ProductDTO> Products { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductDTO>(b =>
+            {
+                b.ToTable("Product");
+                b.HasKey(m => m.Id);
+            });
+        }
 
     }
 }
