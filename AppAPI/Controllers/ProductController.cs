@@ -21,7 +21,6 @@ namespace AppAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductDTO()
         {
@@ -32,7 +31,6 @@ namespace AppAPI.Controllers
             return await _context.Products.ToListAsync();
         }
 
-        // GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProductDTO(int id)
         {
@@ -50,8 +48,6 @@ namespace AppAPI.Controllers
             return productDTO;
         }
 
-        // PUT: api/Product/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductDTO(int id, ProductDTO productDTO)
         {
@@ -81,8 +77,6 @@ namespace AppAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Product
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ProductDTO>> PostProductDTO(ProductDTO productDTO)
         {
@@ -96,7 +90,6 @@ namespace AppAPI.Controllers
             return CreatedAtAction("GetProductDTO", new { id = productDTO.Id }, productDTO);
         }
 
-        // DELETE: api/Product/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductDTO(int id)
         {
