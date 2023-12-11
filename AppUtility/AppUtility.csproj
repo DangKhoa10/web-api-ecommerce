@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppDAL\AppDAL.csproj" />
     <ProjectReference Include="..\AppEntity\AppEntity.csproj" />
-    <ProjectReference Include="..\AppUtility\AppUtility.csproj" />
   </ItemGroup>
 
 </Project>

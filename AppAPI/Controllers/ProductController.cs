@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AppEntity.DTO;
 using AppDAL;
+using AppBLL.Interfaces;
+using AppEntity.Model;
 
 namespace AppAPI.Controllers
 {
@@ -14,104 +16,43 @@ namespace AppAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IProductBizLogic _productBizLogic;
 
-        public ProductController(ApplicationDbContext context)
+        public ProductController(IProductBizLogic productBizLogic)
         {
-            _context = context;
+            _productBizLogic = productBizLogic;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductDTO()
+        public async Task<ActionResult> GetProducts()
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            return await _context.Products.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDTO>> GetProductDTO(int id)
-        {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            var productDTO = await _context.Products.FindAsync(id);
-
-            if (productDTO == null)
+            try
             {
-                return NotFound();
+                var dt = await _productBizLogic.GetProducts();
+                return Ok(dt);
             }
-
-            return productDTO;
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductDTO(int id, ProductDTO productDTO)
-        {
-            if (id != productDTO.Id)
+            catch
             {
                 return BadRequest();
             }
-
-            _context.Entry(productDTO).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductDTOExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
+
+       
 
         [HttpPost]
-        public async Task<ActionResult<ProductDTO>> PostProductDTO(ProductDTO productDTO)
+        public async Task<ActionResult> AddProducts(ProductDTO model)
         {
-          if (_context.Products == null)
-          {
-              return Problem("Entity set 'AppAPIContext.ProductDTO'  is null.");
-          }
-            _context.Products.Add(productDTO);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductDTO", new { id = productDTO.Id }, productDTO);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProductDTO(int id)
-        {
-            if (_context.Products == null)
+            try
             {
-                return NotFound();
+                var dt = await _productBizLogic.AddProducts(model);
+                return Ok(dt);
             }
-            var productDTO = await _context.Products.FindAsync(id);
-            if (productDTO == null)
+            catch
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            _context.Products.Remove(productDTO);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
-        private bool ProductDTOExists(int id)
-        {
-            return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+       
     }
 }

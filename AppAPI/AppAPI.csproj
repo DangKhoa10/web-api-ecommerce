@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.25" />
@@ -19,9 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppAuth\AppAuth.csproj" />
     <ProjectReference Include="..\AppBLL\AppBLL.csproj" />
     <ProjectReference Include="..\AppDAL\AppDAL.csproj" />
     <ProjectReference Include="..\AppEntity\AppEntity.csproj" />
+    <ProjectReference Include="..\AppUtility\AppUtility.csproj" />
   </ItemGroup>
 
 </Project>
