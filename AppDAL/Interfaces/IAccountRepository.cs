@@ -8,5 +8,6 @@ namespace AppDAL.Interfaces
 {
     public interface IAccountRepository
     {
+      
     }
 }

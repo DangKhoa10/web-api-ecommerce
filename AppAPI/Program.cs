@@ -19,6 +19,21 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials()));
 
+builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b =>
+    {
+        b.MigrationsAssembly("AppAPI");
+    });
+});
+builder.Services.AddDbContext<DataContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b =>
+    {
+        b.MigrationsAssembly("AppAPI");
+    });
+});
+
 builder.Services.AddIdentity<UserDTO, RoleDTO>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
 builder.Services.AddAuthentication(options =>
 {
@@ -39,10 +54,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+
 
 Dependency.DependencyConfig(builder.Services);
 

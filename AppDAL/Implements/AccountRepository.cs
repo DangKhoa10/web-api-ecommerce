@@ -9,6 +9,6 @@ namespace AppDAL.Implements
 {
     public class AccountRepository : IAccountRepository
     {
-
+      
     }
 }
