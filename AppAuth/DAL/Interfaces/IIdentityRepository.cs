@@ -1,4 +1,5 @@
 ﻿using AppAuth.Model;
+using AppEntity.Model;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace AppAuth.DAL.Interfaces
 {
     public interface IIdentityRepository
     {
-        public Task<string> Login(UserDTO dto);
-        public Task<IdentityResult> SignUp(UserDTO dto);
+        public Task<string> Login(UserModel dto);
+        public Task<IdentityResult> SignUp(UserModel dto);
     }
 }

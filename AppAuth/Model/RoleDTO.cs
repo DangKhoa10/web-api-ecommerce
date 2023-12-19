@@ -9,5 +9,9 @@ namespace AppAuth.Model
 {
     public class RoleDTO : IdentityRole
     {
+        public RoleDTO() { }
+        public RoleDTO(string roleName) : base(roleName)
+        {
+        }
     }
 }

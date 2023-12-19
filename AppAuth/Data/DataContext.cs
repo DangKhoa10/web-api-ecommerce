@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AppAuth.Data
 {
-    public class DataContext : IdentityDbContext<UserDTO>
+    public class DataContext : IdentityDbContext<UserDTO, RoleDTO , string>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -25,7 +25,7 @@ namespace AppAuth.Data
             {
                 entity.ToTable("K_Users");
             });
-            builder.Entity<IdentityRole>(entity =>
+            builder.Entity<RoleDTO>(entity =>
             {
                 entity.ToTable("K_Roles");
             });

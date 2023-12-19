@@ -9,6 +9,8 @@ using AppEntity.DTO;
 using AppDAL;
 using AppBLL.Interfaces;
 using AppEntity.Model;
+using Microsoft.AspNetCore.Authorization;
+using AppAuth.Model;
 
 namespace AppAPI.Controllers
 {
@@ -24,6 +26,7 @@ namespace AppAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleModel.Customer)]
         public async Task<ActionResult> GetProducts()
         {
             try

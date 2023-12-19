@@ -3,6 +3,7 @@ using AppAuth.Model;
 using AppBLL.Implements;
 using AppBLL.Interfaces;
 using AppEntity.DTO;
+using AppEntity.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppAPI.Controllers
@@ -20,7 +21,7 @@ namespace AppAPI.Controllers
 
 
         [HttpPost("sign-up")]
-        public async Task<ActionResult> SignUp(UserDTO model)
+        public async Task<ActionResult> SignUp(UserModel model)
         {
             try
             {
@@ -29,7 +30,7 @@ namespace AppAPI.Controllers
                 {
                     return Ok(dt.Succeeded);
                 }
-                return Unauthorized();
+                return StatusCode(500);
             }
             catch(Exception ex)
             {
@@ -39,7 +40,7 @@ namespace AppAPI.Controllers
 
 
         [HttpPost("log-in")]
-        public async Task<ActionResult> Login(UserDTO model)
+        public async Task<ActionResult> Login(UserModel model)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace AppAPI.Controllers
                 }
                 return Ok(dt);
             }
-            catch
+            catch (Exception ex)
             {
                 return BadRequest();
             }
